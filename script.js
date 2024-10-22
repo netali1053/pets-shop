@@ -90,15 +90,20 @@ const searchBtn = document.querySelector('#search-btn');
 const searchInput = document.querySelector('#search-input');
 const nothingFound = document.querySelector('#nothing-found');
 
+function addArray(arr) {
+    arr.forEach((item) => {
+        shopItemsContainer.append(makeTemplate(item));
+    });
+}
+
 function displayResults(resultsArray) {
     nothingFound.textContent = "";
     shopItemsContainer.innerHTML = "";
-    resultsArray.forEach(result => {
-        shopItemsContainer.append(makeTemplate(result));
-    });
     if (!resultsArray.length) {
         nothingFound.textContent = "Ничего не найдено";
     }
+
+    addArray(resultsArray);
 }
 
 function makeTemplate(shopObject) {
@@ -123,7 +128,7 @@ function makeTemplate(shopObject) {
     return newItems;
 }
 
-displayResults(items);
+addArray(items);
 
 searchBtn.addEventListener('click', () => {
     const searchStr = searchInput.value.trim().toLowerCase();
